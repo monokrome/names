@@ -1,10 +1,12 @@
-// THIS DOESN'T WORK YET.
-
 // Warning. This will use a lot of memory, but I only use it for inserting
 // fake data during development - so, I'm less than worried about it.
 
 var fs = require('fs'),
     name_lists;
+
+function capitalize(str) {
+	return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 
 function read_list (filename) {
 	return JSON.parse(fs.readFileSync(filename));
@@ -20,8 +22,8 @@ name_lists = {
  * This is a really slow algorithm, but it's also only 3 minutes of code. If
  * you want to make it faster, a pull request would be nice. :)
  */
-function random_names(count, gender) {
-	var current_iter = count,
+function randomize(count, gender) {
+	var current_iter,
 	    list,
 	    first_name, last_name,
 	    names = [];
@@ -32,11 +34,13 @@ function random_names(count, gender) {
 	if (count < 1)
 		throw new Error("I could never produce a negative number of names.");
 
+	current_iter = count;
+
 	if (typeof gender == 'undefined')
 		gender = -1;
 
 	else if (gender == 0)
-		gender == 'female';
+		gender = 'female';
 
 	else if (gender == 1)
 		gender = 'male';
@@ -46,26 +50,27 @@ function random_names(count, gender) {
 		if (!~gender)
 		{
 			var first_name_choices = [
-				random_names(1, 0),
-				random_names(2, 1)
+				randomize(1, 'female')[0][0],
+				randomize(1, 'male')[0][0]
 			];
 
-			first_name = first_name_choices[parseInt(Math.random()*2)-1];
+			first_name = first_name_choices[parseInt(Math.random()*2)];
+
+			console.dir(first_name);
 		}
 		else
 		{
-			// Female.
-			if (gender == 1)
-				list = name_lists.female_first;
-			else
+			if (gender == 'male')
 				list = name_lists.male_first;
+			else
+				list = name_lists.female_first;
 
-			first_name = list[parseInt(Math.random() * list.length) - 1];
+			first_name = list[parseInt(Math.random() * list.length)];
 		}
 
-		last_name = Math.random() * (name_lists.last.length-1);
+		last_name = name_lists.last[parseInt(Math.random() * (name_lists.last.length))];
 
-		names.push(first_name + ' ' + last_name);
+		names.push([capitalize(first_name), capitalize(last_name)]);
 
 		current_iter = current_iter - 1;
 	}
@@ -73,5 +78,12 @@ function random_names(count, gender) {
 	return names;
 }
 
-module.exports = random_names;
+module.exports = {
+	first_names: {
+		female: name_lists.female_first,
+		male: name_lists.male_first
+	},
+	last_names: name_lists.last,
+	random: randomize
+};
 
