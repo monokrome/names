@@ -2,6 +2,7 @@
 // fake data during development - so, I'm less than worried about it.
 
 var fs = require('fs'),
+    path = require('path'),
     name_lists;
 
 function capitalize(str) {
@@ -9,7 +10,7 @@ function capitalize(str) {
 }
 
 function read_list (filename) {
-	return JSON.parse(fs.readFileSync(filename));
+	return JSON.parse(fs.readFileSync(path.join(__dirname, filename)));
 }
 
 name_lists = {
