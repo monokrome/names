@@ -8,3 +8,27 @@ here is a set of 4 files which are composed of the following name lists:
 
 All items are organized by popularity with the most popular names at the top of the file.
 
+You can also import this as a NodeJS module if you'd like, and you can use it in the ways
+demonstrated in the following terminal session:
+
+    > var names = require('./index'); names.random();
+    [ [ 'Mauro', 'Burnley', 'male' ] ]
+    > var names = require('./index'); names.random(10);
+    [ [ 'Daryl', 'Scarpello', 'female' ],
+      [ 'Brice', 'Belson', 'male' ],
+      [ 'Gertude', 'Vieira', 'female' ],
+      [ 'Tracee', 'Wiborg', 'female' ],
+      [ 'Lincoln', 'Vacheresse', 'male' ],
+      [ 'Diego', 'Bishard', 'male' ],
+      [ 'Carol', 'Labarge', 'female' ],
+      [ 'Raleigh', 'Annett', 'male' ],
+      [ 'Gene', 'Nishimoto', 'male' ],
+      [ 'Edward', 'Cripps', 'male' ] ]
+    > var names = require('./index'); names.random(2, 'female');
+    [ [ 'Tinisha', 'Yidiaris', 'female' ], [ 'Yolando', 'Ronan', 'female' ] ]
+    > var names = require('./index'); names.random(3, 'male');
+    [ [ 'Cruz', 'Trujillo', 'male' ],
+      [ 'Adan', 'Orama', 'male' ],
+      [ 'Enoch', 'Sharperson', 'male' ] ]
+
+
