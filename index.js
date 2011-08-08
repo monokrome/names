@@ -26,6 +26,7 @@ function randomize(count, gender) {
 	var current_iter,
 	    list,
 	    first_name, last_name,
+	    current_gender,
 	    names = [];
 
 	if (typeof count == 'undefined')
@@ -49,28 +50,36 @@ function randomize(count, gender) {
 	{
 		if (!~gender)
 		{
-			var first_name_choices = [
-				randomize(1, 'female')[0][0],
-				randomize(1, 'male')[0][0]
-			];
+			var gender_index = parseInt(Math.random() * 2),
 
-			first_name = first_name_choices[parseInt(Math.random()*2)];
+			    first_name_choices = [
+			        randomize(1, 'female')[0][0],
+			        randomize(1, 'male')[0][0]
+			    ];
 
-			console.dir(first_name);
+			first_name = first_name_choices[gender_index];
+
+			if (gender_index == 0)
+				current_gender = 'female';
+			else
+				current_gender = 'male';
 		}
 		else
 		{
+			gender = gender.toLowerCase();
+
 			if (gender == 'male')
 				list = name_lists.male_first;
 			else
 				list = name_lists.female_first;
 
 			first_name = list[parseInt(Math.random() * list.length)];
+			current_gender = gender;
 		}
 
 		last_name = name_lists.last[parseInt(Math.random() * (name_lists.last.length))];
 
-		names.push([capitalize(first_name), capitalize(last_name)]);
+		names.push([capitalize(first_name), capitalize(last_name), current_gender]);
 
 		current_iter = current_iter - 1;
 	}
