@@ -13,6 +13,7 @@ demonstrated in the following terminal session:
 
     > var names = require('./index'); names.random();
     [ [ 'Mauro', 'Burnley', 'male' ] ]
+
     > var names = require('./index'); names.random(10);
     [ [ 'Daryl', 'Scarpello', 'female' ],
       [ 'Brice', 'Belson', 'male' ],
@@ -24,11 +25,12 @@ demonstrated in the following terminal session:
       [ 'Raleigh', 'Annett', 'male' ],
       [ 'Gene', 'Nishimoto', 'male' ],
       [ 'Edward', 'Cripps', 'male' ] ]
+
     > var names = require('./index'); names.random(2, 'female');
     [ [ 'Tinisha', 'Yidiaris', 'female' ], [ 'Yolando', 'Ronan', 'female' ] ]
+
     > var names = require('./index'); names.random(3, 'male');
     [ [ 'Cruz', 'Trujillo', 'male' ],
       [ 'Adan', 'Orama', 'male' ],
       [ 'Enoch', 'Sharperson', 'male' ] ]
-
 
